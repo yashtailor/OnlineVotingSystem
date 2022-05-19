@@ -1,10 +1,12 @@
 package com.example.onlinevotingsystem;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -58,12 +60,14 @@ public class ElectionActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot candidateSnapshot:snapshot.getChildren()){
                     RadioButton newCandidate = new RadioButton(getApplicationContext());
+                    newCandidate.setTextColor(Color.WHITE);
                     newCandidate.setId(View.generateViewId());
                     if(candidateSnapshot.child("isVerified").getValue().toString().equals("true")) {
                         String partyName = candidateSnapshot.child("pName").getValue().toString();
                         String candidateFName = candidateSnapshot.child("fName").getValue().toString();
                         String candidateLName = candidateSnapshot.child("lName").getValue().toString();
                         newCandidate.setText(partyName+" - "+candidateFName+" "+candidateLName);
+                        newCandidate.setTextColor(Color.WHITE);
                         electionCandidatesRadioGroup.addView(newCandidate);
                     }
                 }

@@ -88,6 +88,7 @@ public class ECACandidateReviewActivity extends AppCompatActivity {
                 }*/
                 try{
                     if(candidatesId.size() > 0)updateUser(candidatesId.get(idx));
+                    else done();
                 }catch(Exception e){
                     Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 }

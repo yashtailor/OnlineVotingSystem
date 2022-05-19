@@ -38,36 +38,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Create Election"
-                        app:backgroundTint="#FF5722" />
-
-                    <Button
-                        android:id="@+id/reviewVoterDetails"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:layout_weight=".5"
-                        android:height="150dp"
-                        android:background="@drawable/btn_radius"
-                        android:text="Review Voter Details"
-                        app:backgroundTint="#3F51B5" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/reviewCandidateDetails"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Review Candidate Details"
-                        android:layout_margin="7dp"
-                        android:layout_weight=".5"
-                        android:height="150dp"
-                        android:background="@drawable/btn_radius"
-                        app:backgroundTint="#4CAF50" />
-
+                        app:backgroundTint="#00BCD4" />
                     <Button
                         android:id="@+id/viewAndCalculateResults"
                         android:layout_width="0dp"
@@ -78,7 +49,34 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Calculate Results of ongoing Elections"
-                        app:backgroundTint="#9C27B0" />
+                        app:backgroundTint="#5A73FF" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/reviewVoterDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_weight=".5"
+                        android:height="150dp"
+                        android:background="@drawable/btn_radius"
+                        android:text="Review Voter Details"
+                        app:backgroundTint="#FF5722" />
+                    <Button
+                        android:id="@+id/reviewCandidateDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Review Candidate Details"
+                        android:layout_margin="7dp"
+                        android:layout_weight=".5"
+                        android:height="150dp"
+                        android:background="@drawable/btn_radius"
+                        app:backgroundTint="#8BC34A" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,7 +93,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="View Past Elections"
-                        app:backgroundTint="#2196F3" />
+                        app:backgroundTint="#FF669A" />
 
                     <Button
                         android:id="@+id/logoutECA"
@@ -107,7 +105,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Logout"
-                        app:backgroundTint="#F44336" />
+                        app:backgroundTint="#FFEB3B" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

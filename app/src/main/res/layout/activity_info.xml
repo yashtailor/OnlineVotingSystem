@@ -10,6 +10,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/reviewTextVoter"
+            app:cardBackgroundColor="#F44336"
             app:cardElevation="10dp"
             app:contentPadding="10dp"
             app:cardCornerRadius="5dp"
@@ -19,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Application Under Progress"
+                android:text="Application Under Review. Not yet Authorized for Voting."
                 android:id="@+id/messageTxt"
                 android:layout_gravity="center"/>
         </androidx.cardview.widget.CardView>
@@ -51,7 +53,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Go To Election Page"
-                        app:backgroundTint="#FF5722" />
+                        app:backgroundTint="#FC6637" />
 
                     <Button
                         android:id="@+id/goToMainPage"
@@ -63,7 +65,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Go To Edit Page"
-                        app:backgroundTint="#3F51B5" />
+                        app:backgroundTint="#00BCD4" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,7 +81,7 @@
                         android:layout_weight=".5"
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
-                        app:backgroundTint="#4CAF50" />
+                        app:backgroundTint="#8BC34A" />
 
                     <Button
                         android:id="@+id/logout"
@@ -91,7 +93,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Logout"
-                        app:backgroundTint="#F44336" />
+                        app:backgroundTint="#FFEB3B" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

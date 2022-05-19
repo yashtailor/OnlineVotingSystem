@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private  FirebaseUser user;
     private UploadTask uploadTask;
     private int count = 0;
+    private LinearLayout cardView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         datePicker = findViewById(R.id.datePicker);
         chooseFileBtn = findViewById(R.id.chooseFileBtn);
         genderGrp = findViewById(R.id.genderGrp);
+        cardView = findViewById(R.id.uploadVoter);
         try{
             DatabaseReference subDbRef = dbRef.child("user-data").child(uid);
             //Toast.makeText(getApplicationContext(),subDbRef.toString(),Toast.LENGTH_LONG).show();
@@ -200,12 +203,14 @@ public class MainActivity extends AppCompatActivity {
         uploadTask = (UploadTask) upload.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(MainActivity.this, "Added in cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Aadhar Image Upload Successfully!", Toast.LENGTH_SHORT).show();
+                cardView.setVisibility(View.GONE);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                cardView.setVisibility(View.GONE);
             }
         });
     }
@@ -214,16 +219,17 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_FILES && resultCode == RESULT_OK && data != null && data.getData() != null) {
             file = data.getData();
-            if(count==0){
-                Toast.makeText(getApplicationContext(), "PDF Type Not supported", Toast.LENGTH_SHORT).show();
-                count += 1;
-                return;
-            }
-            if(count==1){
-                Toast.makeText(getApplicationContext(), "Doc Type Not supported", Toast.LENGTH_SHORT).show();
-                count += 1;
-                return;
-            }
+//            if(count==0){
+//                Toast.makeText(getApplicationContext(), "PDF Type Not supported", Toast.LENGTH_SHORT).show();
+//                count += 1;
+//                return;
+//            }
+//            if(count==1){
+//                Toast.makeText(getApplicationContext(), "Doc Type Not supported", Toast.LENGTH_SHORT).show();
+//                count += 1;
+//                return;
+//            }
+            cardView.setVisibility(View.VISIBLE);
             putFileInStorage(file);
         }
     }

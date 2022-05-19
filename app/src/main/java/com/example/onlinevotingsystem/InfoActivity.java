@@ -1,6 +1,8 @@
 package com.example.onlinevotingsystem;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class InfoActivity extends AppCompatActivity {
     private Button goToPendingElectionsPage,goToEditPage,vGoToResultsPage,logout;
+    private CardView cardView;
     private TextView messageText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class InfoActivity extends AppCompatActivity {
         vGoToResultsPage = findViewById(R.id.vGoToResultsPage);
         messageText = findViewById(R.id.messageTxt);
         logout = findViewById(R.id.logout);
+        cardView = findViewById(R.id.reviewTextVoter);
         FirebaseUser curUser = FirebaseAuth.getInstance().getCurrentUser();
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +50,11 @@ public class InfoActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child("isVerified").getValue().toString().equals("true")){
                     messageText.setText("Profile verified. Authorized for voting.");
+                    cardView.setCardBackgroundColor(Color.parseColor("#4CAF50"));
                 }else{
                     String fmsg = snapshot.child("message").getValue().toString();
-                    if(fmsg.length()==0)fmsg="Profile is under verification. Not yet authorized for Voting.";
-                    else fmsg += "Status is Declined.";
+                    if(fmsg.length()==0)fmsg="Profile is under Review. Not yet authorized for Voting.";
+                    else fmsg = "Status is Declined. "+fmsg;
                     messageText.setText(fmsg);
                 }
             }

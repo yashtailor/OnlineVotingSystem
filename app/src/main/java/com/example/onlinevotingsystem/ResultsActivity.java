@@ -2,13 +2,19 @@ package com.example.onlinevotingsystem;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,7 +98,7 @@ import java.util.Map;
                                 CardView newCard = new CardView(getApplicationContext());
                                 PieChart pieChart = new PieChart(getApplicationContext());
                                 pieChart.setId(View.generateViewId());
-                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(800, 500);
+                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 500);
                                 pieChart.setLayoutParams(layoutParams);
                                 pieChart.getDescription().setEnabled(false);
                                 pieChart.setRotationEnabled(true);
@@ -115,41 +121,91 @@ import java.util.Map;
                                 newCard.setUseCompatPadding(true);
                                 newCard.setMaxCardElevation(20);
                                 TextView electionNameTxt = new TextView(getApplicationContext());
+                                electionNameTxt.setGravity(Gravity.CENTER_HORIZONTAL);
                                 String electionName = electionSnapshot.child("electionName").getValue().toString();
                                 electionNameTxt.setText(electionName);
                                 electionNameTxt.setTextSize(30);
                                 newLinearLayout.addView(electionNameTxt);
+                                TableLayout tableLayout = new TableLayout(getApplicationContext());
+                                tableLayout.setPadding(10,0,10,0);
+                                TableLayout.LayoutParams layoutParamsTab = new TableLayout.LayoutParams(
+                                        TableLayout.LayoutParams.MATCH_PARENT,
+                                        TableLayout.LayoutParams.WRAP_CONTENT
+                                );
+                                layoutParamsTab.setMargins(10,10,10,10);
+                                tableLayout.setLayoutParams(layoutParamsTab);
+                                tableLayout.setStretchAllColumns(true);
+                                TableRow.LayoutParams linearLay = new TableRow.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                                        1.0f
+                                );
+                                TableRow tableRowHeader = new TableRow(getApplicationContext());
+                                tableRowHeader.setPadding(5,5,5,5);
+                                tableRowHeader.setBackgroundColor(Color.parseColor("#0079D6"));
+                                tableRowHeader.setLayoutParams(linearLay);
+                                TextView candidateNameViewHeader = new TextView(getApplicationContext());
+                                candidateNameViewHeader.setText("Party Name");
+                                candidateNameViewHeader.setGravity(Gravity.CENTER);
+                                candidateNameViewHeader.setTextSize(15);
+                                candidateNameViewHeader.setTypeface(null, Typeface.BOLD);
+                                TextView candidateVotesViewHeader = new TextView(getApplicationContext());
+                                candidateVotesViewHeader.setText("Votes");
+                                candidateVotesViewHeader.setGravity(Gravity.CENTER);
+                                candidateVotesViewHeader.setTextSize(15);
+                                candidateVotesViewHeader.setTypeface(null,Typeface.BOLD);
+                                tableRowHeader.addView(candidateNameViewHeader);
+                                tableRowHeader.addView(candidateVotesViewHeader);
+                                tableLayout.addView(tableRowHeader);
                                 //Toast.makeText(getApplicationContext(),candidates.size(),Toast.LENGTH_SHORT).show();
                                 for(int i=0;i<candidates.size();i++){
+                                    TableRow tableRow = new TableRow(getApplicationContext());
+                                    tableRow.setPadding(5,5,5,5);
+                                    tableRow.setBackgroundColor(Color.parseColor("#DAE8FC"));
+                                    tableRow.setLayoutParams(linearLay);
+                                    TextView candidateNameTxtView = new TextView(getApplicationContext());
+                                    candidateNameTxtView.setText(candidates.get(i));
+                                    candidateNameTxtView.setGravity(Gravity.CENTER);
+//                                    candidateNameTxtView.setLayoutParams(linearLay);
                                     //Toast.makeText(getApplicationContext(),candidates.get(i),Toast.LENGTH_SHORT).show();
-                                    TextView candidateTxtView = new TextView(getApplicationContext());
+//                                    TextView candidateTxtView = new TextView(getApplicationContext());
                                     String votes;
                                     if(electionSnapshot.child("candidate-results").hasChild(candidates.get(i))){
                                         votes = electionSnapshot.child("candidate-results").child(candidates.get(i)).getValue().toString();
-                                        votes = String.valueOf(Integer.parseInt(votes)+1);
+                                        votes = String.valueOf(Integer.parseInt(votes));
                                     }else{
-                                        votes = "1";
+                                        votes = "0";
                                     }
-                                    candidateTxtView.setText(candidates.get(i) + " -"+votes);
-                                    typeAmountMap.put(candidates.get(i),Integer.parseInt(votes));
-                                    //collecting the entries with label name
-                                    PieDataSet pieDataSet = new PieDataSet(pieEntries,label);
-                                    //setting text size of the value
-                                    pieDataSet.setValueTextSize(12f);
-                                    //providing color list for coloring different entries
-                                    pieDataSet.setColors(colors);
-                                    //grouping the data set from entry to chart
-                                    PieData pieData = new PieData(pieDataSet);
-                                    //showing the value of the entries, default true if not set
-                                    pieData.setDrawValues(true);
-                                    pieChart.setData(pieData);
-                                    pieChart.invalidate();
-                                    candidateTxtView.setTextSize(20);
-                                    newLinearLayout.addView(candidateTxtView);
+//                                    candidateTxtView.setText(candidates.get(i) + " -"+votes);
+                                    TextView candidateVotesTxtView = new TextView(getApplicationContext());
+                                    candidateVotesTxtView.setText(votes);
+                                    candidateVotesTxtView.setGravity(Gravity.CENTER);
+//                                    candidateVotesTxtView.setLayoutParams(linearLay);
+                                    tableRow.addView(candidateNameTxtView);
+                                    tableRow.addView(candidateVotesTxtView);
+                                    tableLayout.addView(tableRow);
+                                    if(!votes.contentEquals("0")) {
+                                        typeAmountMap.put(candidates.get(i), Integer.parseInt(votes));
+                                        //collecting the entries with label name
+                                        PieDataSet pieDataSet = new PieDataSet(pieEntries, label);
+                                        //setting text size of the value
+                                        pieDataSet.setValueTextSize(12f);
+                                        //providing color list for coloring different entries
+                                        pieDataSet.setColors(colors);
+                                        //grouping the data set from entry to chart
+                                        PieData pieData = new PieData(pieDataSet);
+                                        //showing the value of the entries, default true if not set
+                                        pieData.setDrawValues(true);
+                                        pieChart.setData(pieData);
+                                        pieChart.invalidate();
+                                    }
+//                                    candidateTxtView.setTextSize(20);
+//                                    newLinearLayout.addView(candidateTxtView);
                                 }
                                 for(String type: typeAmountMap.keySet()){
                                     pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));
                                 }
+                                newLinearLayout.addView(tableLayout);
                                 newLinearLayout.addView(pieChart);
                                 newLinearLayout.setPadding(5,5,5,5);
                                 newCard.addView(newLinearLayout);

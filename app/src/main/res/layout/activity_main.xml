@@ -163,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="20dp"
-                        android:text="Add Aadhar Card Picture"/>
+                        android:text="Add Aadhar Card Image"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -182,9 +182,26 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Submit Aadhar"
+                            android:text="Submit Details"
                             app:backgroundTint="#FF5722"
                             app:iconTint="#FF5722" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:visibility="gone"
+                        android:id="@+id/uploadVoter"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Processing..."/>
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

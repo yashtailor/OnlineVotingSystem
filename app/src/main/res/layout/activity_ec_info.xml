@@ -10,6 +10,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/reviewTextCandidate"
+            app:cardBackgroundColor="#F44336"
             app:cardElevation="10dp"
             app:contentPadding="10dp"
             app:cardCornerRadius="5dp"
@@ -19,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Application Under Progress"
+                android:text="Application Under Review. Not yet Authorized for Enrolling for Elections."
                 android:id="@+id/messageTxt"
                 android:layout_gravity="center"/>
         </androidx.cardview.widget.CardView>
@@ -51,7 +53,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Edit Details"
-                        app:backgroundTint="#FF5722" />
+                        app:backgroundTint="#FF6B3D" />
                     <Button
                         android:id="@+id/logoutCandidate"
                         android:layout_width="0dp"
@@ -62,7 +64,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="Logout"
-                        app:backgroundTint="#F44336" />
+                        app:backgroundTint="#FFEB3B" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -78,7 +80,7 @@
                         android:height="150dp"
                         android:background="@drawable/btn_radius"
                         android:text="View Results"
-                        app:backgroundTint="#3F51B5" />
+                        app:backgroundTint="#8BC34A" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

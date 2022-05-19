@@ -82,7 +82,7 @@
                     android:id="@+id/btnECRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Register as EC"
+                    android:text="Register as Election Candidate"
                     app:backgroundTint="#3F51B5" />
 
                 <Button
@@ -90,16 +90,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Already have an account? Login  here"
-                    app:backgroundTint="#4CAF50" />
+                    app:backgroundTint="#FF9800" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <!-- ProgressBar for loading time -->
-        <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone" />
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

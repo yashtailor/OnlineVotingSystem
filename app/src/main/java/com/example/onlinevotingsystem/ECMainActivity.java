@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,6 +55,7 @@ public class ECMainActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private  FirebaseUser user;
     private UploadTask uploadTask;
+    private LinearLayout cardView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,6 +79,7 @@ public class ECMainActivity extends AppCompatActivity {
         datePicker = findViewById(R.id.datePicker);
         chooseFileBtn = findViewById(R.id.chooseFileBtn);
         genderGrp = findViewById(R.id.genderGrp);
+        cardView = findViewById(R.id.uploadEC);
         try{
             DatabaseReference subDbRef = dbRef.child("election-candidates").child(uid);
             //Toast.makeText(getApplicationContext(),subDbRef.toString(),Toast.LENGTH_LONG).show();
@@ -170,18 +174,21 @@ public class ECMainActivity extends AppCompatActivity {
         uploadTask = (UploadTask) upload.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(ECMainActivity.this, "Added in cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ECMainActivity.this, "Aadhar Upload Succesfully.", Toast.LENGTH_SHORT).show();
+                cardView.setVisibility(View.GONE);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(ECMainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                cardView.setVisibility(View.GONE);
             }
         });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        cardView.setVisibility(View.VISIBLE);
         if (requestCode == REQUEST_CODE_FILES && resultCode == RESULT_OK && data != null && data.getData() != null) {
             file = data.getData();
             putFileInStorage(file);

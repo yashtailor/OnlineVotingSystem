@@ -97,15 +97,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Don't have an account? Register here."
-                        app:backgroundTint="#673AB7" />
+                        app:backgroundTint="#FF9800" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-        <!-- ProgressBar for Loading Time -->
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
+        <!-- ProgressBar for loading time -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

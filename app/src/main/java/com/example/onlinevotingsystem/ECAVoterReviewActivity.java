@@ -36,7 +36,7 @@ public class ECAVoterReviewActivity extends AppCompatActivity {
     private DatabaseReference votersDbRef;
     private ListView voters;
     private TextView firstName,lastName,aadharNum,gender,dob;
-    private LinearLayout upparLayout,done;
+    private LinearLayout upparLayout,doneBtn;
     private EditText message;
     private Button vAccpet,vDecline,backToMain,backToMain2;
     private ArrayList<String> voterIds = new ArrayList<String>();
@@ -55,7 +55,7 @@ public class ECAVoterReviewActivity extends AppCompatActivity {
         dob = findViewById(R.id.vDob);
         message = findViewById(R.id.vReviewMessage);
         vAadharImg = findViewById(R.id.vAadharImg);
-        upparLayout = findViewById(R.id.upperLayout);
+        upparLayout = findViewById(R.id.upperLayoutVoter);
         backToMain = findViewById(R.id.backToMainFromReviewVoter);
         backToMain2 = findViewById(R.id.backToMainFromReviewVoter2);
         backToMain.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class ECAVoterReviewActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),ECAMainActivity.class));
             }
         });
-        done = findViewById(R.id.doneLayout);
+        doneBtn = findViewById(R.id.doneLayout);
         votersDbRef = FirebaseDatabase.getInstance().getReference();
         votersDbRef = votersDbRef.child("user-data");
         votersDbRef.addListenerForSingleValueEvent((new ValueEventListener() {
@@ -80,7 +80,9 @@ public class ECAVoterReviewActivity extends AppCompatActivity {
                     if(userSnapshot.child("isVerified").getValue().toString().equals("false")) voterIds.add(userSnapshot.getKey());
                     //Toast.makeText(getApplicationContext(),userSnapshot.getKey(),Toast.LENGTH_LONG).show();
                 }
+                //Toast.makeText(getApplicationContext(),voterIds.size(),Toast.LENGTH_LONG).show();
                 if(voterIds.size() > 0)updateUser(voterIds.get(idx));
+                else done();
             }
 
             @Override
@@ -170,7 +172,8 @@ public class ECAVoterReviewActivity extends AppCompatActivity {
     }
 
     void done(){
-        done.setVisibility(View.VISIBLE);
+//        Toast.makeText(getApplicationContext(),"HOLA",Toast.LENGTH_LONG).show();
+        doneBtn.setVisibility(View.VISIBLE);
         upparLayout.setVisibility(View.GONE);
     }
 }

@@ -29,6 +29,7 @@ public class ElectionCalculateResults extends AppCompatActivity {
     private DatabaseReference electionDbRef;
     private FirebaseUser curUser;
     private Button backToMainPage;
+    private LinearLayout linearLayout;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_elections);
@@ -37,6 +38,7 @@ public class ElectionCalculateResults extends AppCompatActivity {
         electionDbRef = electionDbRef.child("elections");
         curUser = FirebaseAuth.getInstance().getCurrentUser();
         backToMainPage = findViewById(R.id.backToInfoPageFromMainECA);
+        linearLayout = findViewById(R.id.noOngoingElectionsToEndLayout);
         backToMainPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,10 +49,12 @@ public class ElectionCalculateResults extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int numElections = 0;
                 for (DataSnapshot candidateSnapshot : snapshot.getChildren()) {
                     if(candidateSnapshot.child("isDone").getValue().toString().equals("true")){
                         //don't add
                     }else{
+                        numElections++;
                         Button curElectionBtn = new Button(getApplicationContext());
                         curElectionBtn.setId(View.generateViewId());
                         String electionName = candidateSnapshot.child("electionName").getValue().toString();
@@ -78,8 +82,10 @@ public class ElectionCalculateResults extends AppCompatActivity {
                                                     .setValue(result.getValue().toString());
                                         }
                                         Toast.makeText(getApplicationContext(),"Calculated",Toast.LENGTH_LONG).show();
-                                        curElectionBtn.setVisibility(View.INVISIBLE);
+                                        curElectionBtn.setVisibility(View.GONE);
                                         candidateSnapshot.child("isDone").getRef().setValue("true");
+                                        finish();
+                                        startActivity(getIntent());
                                     }
 
                                     @Override
@@ -92,6 +98,8 @@ public class ElectionCalculateResults extends AppCompatActivity {
                         showAllRunningElectionsToCalculate.addView(curElectionBtn);
                     }
                 }
+                if(numElections==0)linearLayout.setVisibility(View.VISIBLE);
+                else linearLayout.setVisibility(View.GONE);
             }
 
             @Override

@@ -224,7 +224,7 @@ tools:context=".ECAVoterReviewActivity">
                         android:textSize="20dp"
                         android:layout_margin="5dp"
                         android:layout_gravity="center_vertical"
-                        android:text="No more voters to be reviewed"/>
+                        android:text="No more candidates to be reviewed"/>
 
                     <Button
                         android:layout_width="wrap_content"
